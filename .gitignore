@@ -1,0 +1,19 @@
+# Thư mục chứa dữ liệu không đưa lên git
+data/
+raw_videos/
+processed_data/
+
+# Cache và môi trường ảo của Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db
