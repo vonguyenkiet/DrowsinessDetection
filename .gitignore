@@ -1,8 +1,8 @@
-# Thư mục chứa dữ liệu không đưa lên git
-data/
-raw_videos/
-processed_data/
-
+# Bỏ qua các file video để không đưa file nặng lên Git
+*.mp4
+*.avi
+*.mov
+*.mkv
 # Cache và môi trường ảo của Python
 __pycache__/
 *.pyc
