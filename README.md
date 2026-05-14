@@ -22,7 +22,7 @@ DrowsinessDetection/
 │       └── alarm.wav             # File âm thanh chuông báo động
 ├── data/
 │   ├── raw_videos/               # Dữ liệu video thô 5s (dành cho huấn luyện/đánh giá)
-│   └── merged_videos/            # Dữ liệu video đã ghép 15s siêu tốc
+│   └── merged_videos/            # Dữ liệu video đã ghép 15s 
 ├── src/
 │   ├── config/
 │   │   └── settings.py           # Quản lý tập trung các hằng số và ngưỡng sinh trắc (EAR, MAR, Pose)
