@@ -22,11 +22,24 @@ class CameraThread(threading.Thread):
         self.frame_queue = frame_queue
         self.source = source
         self.running = False
+        self.new_source = None
         self.cap = cv2.VideoCapture(self.source)
+
+    def change_source(self, source):
+        """Yêu cầu đổi nguồn video (gọi từ UI thread)"""
+        self.new_source = source
 
     def run(self):
         self.running = True
         while self.running:
+            # Nếu có yêu cầu đổi nguồn từ UI
+            if self.new_source is not None:
+                if self.cap.isOpened():
+                    self.cap.release()
+                self.source = self.new_source
+                self.cap = cv2.VideoCapture(self.source)
+                self.new_source = None
+                
             ret, frame = self.cap.read()
             if not ret:
                 # Nếu đọc hết file video (trong quá trình test), lặp lại từ đầu

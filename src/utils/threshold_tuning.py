@@ -5,6 +5,21 @@ import numpy as np
 import mediapipe as mp
 import random
 
+"""
+MODULE: THRESHOLD TUNING (Tự động tinh chỉnh ngưỡng sinh trắc)
+--------------------------------------------------------------
+Mục đích: Khắc phục nhược điểm "Hard-coded Thresholds" (Ngưỡng cứng) bằng cách học ngưỡng từ dữ liệu thực tế (Data-driven).
+
+Cơ sở lý thuyết:
+1. Trích xuất đặc trưng (Feature Extraction): Sử dụng kỹ thuật Frame Skipping (nhảy cóc khung hình) để giảm thiểu tính toán thừa 
+   trên các frame lân cận có độ tương đồng cao, sau đó dùng FaceMesh tính EAR, MAR, Pose cho mỗi nhóm nhãn.
+2. Phương pháp Thống kê (Statistical Approach):
+   - EAR / MAR: Sử dụng phép tính Trung bình cộng (Mean) giữa giá trị của trạng thái Bình thường (Normal) và Buồn ngủ (Drowsy) 
+     để tìm ra điểm cắt (Decision Boundary) tối ưu nhất.
+   - Head Pose: Dùng thuật toán Phân vị (Percentile) thứ 10 để loại bỏ nhiễu nhiễu ngoại lai (Outliers). Phân vị thứ 10 nghĩa là 
+     chấp nhận sai số 10% ở nhóm Distracted để hệ thống không quá nhạy cảm, tránh False Positives.
+"""
+
 # Đảm bảo đường dẫn import tương đối
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src.utils.geometry import calculate_ear, calculate_mar
@@ -93,7 +108,7 @@ def auto_tune_thresholds(data_dir):
     
     # --- XUẤT FILE CSV ĐỂ THEO DÕI ---
     import csv
-    csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../threshold_features.csv'))
+    csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../threshold_features15s.csv'))
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(["Label", "EAR", "MAR", "Pitch", "Yaw"])
@@ -155,8 +170,8 @@ def auto_tune_thresholds(data_dir):
     print(f"\n✅ [THÀNH CÔNG] Đã tự động cập nhật các ngưỡng mới nhất vào file: {settings_path}")
 
 if __name__ == "__main__":
-    # Trỏ đúng đến thư mục data chứa raw_videos
-    data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/raw_videos'))
+    # Trỏ đúng đến thư mục data chứa merged_videos (15 giây)
+    data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/merged_videos'))
     # Đặt fixed seed để kết quả ổn định qua các lần run
     random.seed(42)
     auto_tune_thresholds(data_dir)

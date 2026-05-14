@@ -4,6 +4,21 @@ import time
 import sys
 import os
 
+"""
+MODULE CHÍNH: KHỞI CHẠY HỆ THỐNG (Main Entry Point)
+---------------------------------------------------
+Kiến trúc luồng (Multi-threading Architecture):
+Dự án áp dụng mô hình phân tán tác vụ qua 4 luồng độc lập để tối ưu hóa hiệu năng và đạt được Real-time:
+1. Camera Thread: Chỉ chịu trách nhiệm đọc frame từ Camera hoặc File Video. (I/O Bound)
+2. AI Thread: Chạy MediaPipe FaceMesh và tính toán khoảng cách hình học EAR/MAR/Pose. (CPU Bound)
+3. Alert Thread: Quản lý phát âm thanh cảnh báo không đồng bộ bằng Pygame, tránh làm đứng hình. (I/O Bound)
+4. UI Thread (Main): Vẽ giao diện Tkinter và lấy dữ liệu từ AI Thread để hiển thị. (Event Loop)
+
+Giao tiếp giữa các luồng:
+Sử dụng cấu trúc dữ liệu `queue.Queue` với maxsize=2 kết hợp chiến lược "Drop old, keep new" 
+(Bỏ frame cũ, giữ frame mới) để đảm bảo độ trễ giữa Camera và Giao diện UI luôn <= 2 giây.
+"""
+
 from src.threads.camera_thread import CameraThread
 from src.threads.ai_thread import AIThread
 from src.threads.alert_thread import AlertThread
@@ -49,7 +64,7 @@ def main():
 
     # 4. Chạy Luồng UI (Buộc phải nằm ở Main Thread)
     try:
-        run_main_ui(result_queue=result_queue, stop_event=stop_event)
+        run_main_ui(result_queue=result_queue, stop_event=stop_event, camera_thread=camera_thread)
     except KeyboardInterrupt:
         # Xử lý khi người dùng nhấn Ctrl+C ở terminal
         stop_event.set()

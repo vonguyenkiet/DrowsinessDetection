@@ -1,5 +1,18 @@
 import numpy as np
 
+"""
+MODULE: BIOMETRIC GEOMETRY (Hình học Sinh trắc học)
+---------------------------------------------------
+Mục đích: Tính toán các chỉ số EAR (Eye Aspect Ratio) và MAR (Mouth Aspect Ratio) để phát hiện nhắm mắt/ngáp.
+
+Cơ sở lý thuyết học thuật:
+1. Bất biến với tỷ lệ (Scale Invariance): EAR và MAR được tính bằng TỶ LỆ giữa khoảng cách dọc và khoảng cách ngang. 
+   Do đó, chỉ số này không phụ thuộc vào việc tài xế ngồi gần hay xa camera, giúp thuật toán cực kỳ ổn định.
+2. Phương pháp Euclidean: Tính khoảng cách đường thẳng L2-norm giữa 2 điểm ảnh trên không gian 2D.
+3. Cải tiến MAR: Hàm `calculate_mar` sử dụng 8 điểm (thay vì 6 điểm tiêu chuẩn) để lấy trung bình 3 khoảng cách dọc,
+   giúp tránh nhiễu do hình dáng môi thay đổi khi nói chuyện (bắt chính xác hành vi Ngáp).
+"""
+
 def calculate_euclidean_distance(p1, p2):
     """
     Tính khoảng cách Euclidean giữa 2 điểm.

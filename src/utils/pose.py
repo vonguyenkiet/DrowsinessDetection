@@ -1,6 +1,19 @@
 import cv2
 import numpy as np
 
+"""
+MODULE: HEAD POSE ESTIMATION (Ước lượng góc xoay đầu 3D)
+---------------------------------------------------------
+Mục đích: Xác định tài xế có đang nhìn thẳng hay nhìn lệch (Distracted) dựa trên góc Pitch, Yaw, Roll.
+
+Cơ sở lý thuyết học thuật:
+1. PnP Problem (Perspective-n-Point): Sử dụng hàm `cv2.solvePnP` để tìm ra ma trận biến đổi (Rotation & Translation) 
+   chuyển từ tọa độ 3D của khuôn mặt giả định sang tọa độ 2D thu được từ MediaPipe trên mặt phẳng ảnh.
+2. Euler Angles: Góc xoay trả về từ PnP là Rotation Vector. Ta dùng `cv2.Rodrigues` để chuyển sang Ma trận xoay (Rotation Matrix), 
+   sau đó dùng thuật toán phân rã `RQDecomp3x3` để bóc tách ra 3 góc Euler (Pitch, Yaw, Roll).
+3. Gimbal Lock & Reverted Axis: Xử lý bù trừ 180 độ để giải quyết hiện tượng lật trục tọa độ khi người dùng nhìn thẳng.
+"""
+
 def get_head_pose(landmarks, frame_width, frame_height):
     """
     Tính 3 góc xoay (Pitch, Yaw, Roll) của đầu bằng cv2.solvePnP.

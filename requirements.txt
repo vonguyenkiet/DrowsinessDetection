@@ -3,3 +3,10 @@ mediapipe
 numpy
 pygame
 python-dotenv
+Pillow
+
+moviepy
+tqdm
+moviepy
+tqdm
+moviepy
