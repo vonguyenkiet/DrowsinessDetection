@@ -11,7 +11,7 @@ from src.ui.main_window import run_main_ui
 
 def main():
     print("==================================================")
-    print("🚘 KHỞI ĐỘNG HỆ THỐNG CẢNH BÁO LÁI XE (DMS)")
+    print(" KHỞI ĐỘNG HỆ THỐNG CẢNH BÁO LÁI XE (DMS)")
     print("==================================================")
 
     # 1. Khởi tạo Event điều phối luồng

@@ -65,11 +65,24 @@ def get_head_pose(landmarks, frame_width, frame_height):
     # 6. Lấy giá trị Pitch, Yaw, Roll (đã được RQDecomp3x3 trả về theo độ)
     # Xoay quanh trục X (Pitch) - Cúi/Ngẩng
     pitch = angles[0]
-    
+    # Chuẩn hóa để tránh lật trục 180 độ (Gimbal lock / Reverted Axis)
+    if pitch > 90:
+        pitch -= 180
+    elif pitch < -90:
+        pitch += 180
+        
     # Xoay quanh trục Y (Yaw) - Quay Trái/Phải
     yaw = angles[1]
-    
+    if yaw > 90:
+        yaw -= 180
+    elif yaw < -90:
+        yaw += 180
+        
     # Xoay quanh trục Z (Roll) - Nghiêng đầu
     roll = angles[2]
+    if roll > 90:
+        roll -= 180
+    elif roll < -90:
+        roll += 180
     
     return pitch, yaw, roll

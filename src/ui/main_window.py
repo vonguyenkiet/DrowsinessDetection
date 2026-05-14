@@ -44,12 +44,13 @@ def run_main_ui(result_queue, stop_event):
         
         # 1. Vẽ FaceMesh Landmarks lên khung hình
         if landmarks:
+            custom_spec = mp_drawing.DrawingSpec(thickness=2, circle_radius=2, color=(0, 255, 255)) # Cyan
             mp_drawing.draw_landmarks(
                 image=frame,
                 landmark_list=landmarks,
                 connections=mp_face_mesh.FACEMESH_TESSELATION,
-                landmark_drawing_spec=None,
-                connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_tesselation_style()
+                landmark_drawing_spec=custom_spec,
+                connection_drawing_spec=custom_spec
             )
         
         # 2. Xử lý logic hiển thị màu sắc và trạng thái (Xanh lá / Đỏ)
