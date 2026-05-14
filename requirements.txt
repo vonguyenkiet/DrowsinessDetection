@@ -1,12 +1,21 @@
-opencv-python
-mediapipe
-numpy
-pygame
-python-dotenv
-Pillow
+# =========================================================================
+# DANH SÁCH THƯ VIỆN & MÔI TRƯỜNG PHỤ THUỘC (DEPENDENCIES)
+# Dự án: Hệ Thống Giám Sát và Cảnh Báo Lái Xe An Toàn (DMS)
+# =========================================================================
 
-moviepy
-tqdm
-moviepy
-tqdm
-moviepy
+# --- 1. Nhận Diện AI & Tính Toán Toán Học (Core Logic) ---
+mediapipe>=0.10.0           # Cung cấp mô hình BlazeFace (One-Stage) và FaceMesh để trích xuất 468 điểm mốc khuôn mặt siêu nhẹ.
+numpy>=1.26.4               # Thư viện Đại số tuyến tính, dùng để xử lý mảng (arrays) cực nhanh trong quá trình tính toán EAR, MAR và ma trận Rotation.
+
+# --- 2. Xử Lý Hình Ảnh & Video (Computer Vision) ---
+opencv-python>=4.10.0.84    # Đảm nhiệm đọc/ghi Frame từ Webcam/Video file, xử lý Resize, hệ màu BGR->RGB, và vẽ hình cơ bản (Contours).
+
+# --- 3. Giao Diện Người Dùng & Cảnh Báo (UI/UX & Audio) ---
+Pillow>=10.2.0              # (PIL) Cầu nối cực kỳ quan trọng giúp chuyển đổi mảng ảnh NumPy (OpenCV) thành định dạng ImageTk để hiển thị mượt mà trên Canvas Tkinter.
+pygame>=2.5.2               # Cung cấp module `pygame.mixer` độc lập hỗ trợ phát âm thanh cảnh báo (alarm.wav) dưới dạng Non-blocking I/O mà không làm giật luồng AI.
+
+# --- 4. Công Cụ Hỗ Trợ Dữ Liệu (Data Pipeline & Utils) ---
+moviepy>=2.2.1              # Sử dụng cho công cụ Data_Extraction để cắt clip 5s.
+imageio-ffmpeg>=0.6.0       # Tích hợp nhân FFmpeg dùng cho thao tác "Stream Copy" siêu tốc (Ghép 4000 video 5s thành 15s chỉ trong vài chục giây mà không cần Render lại).
+tqdm>=4.66.4                # Thư viện hiển thị thanh tiến trình (Progress Bar) trực quan trên Terminal khi chạy các script phân tích hàng loạt video.
+python-dotenv>=1.0.1        # Quản lý các biến môi trường nếu sau này muốn mở rộng kết nối Cloud/API.
