@@ -83,4 +83,4 @@ python main.py
   ```
 
 ## 📝 Dành Cho Đồ Án Sinh Viên
-Dự án được tối ưu rất sâu về mặt học thuật. Toàn bộ mã nguồn đã được gắn các **khối Docstring giải thích lý thuyết chi tiết** (Lý do chọn kiến trúc One-Stage, giải pháp Gimbal Lock, tính chất Scale Invariance của EAR/MAR, MLOps configuration...). Bạn hoàn toàn có thể trích xuất các bình luận này để đưa vào Báo cáo Đồ án / Luận văn để lấy điểm cao về phần Thiết kế Hệ Thống.
+Dự án được tối ưu rất sâu về mặt học thuật. Toàn bộ mã nguồn đã được gắn các **khối Docstring giải thích lý thuyết chi tiết** (Lý do chọn kiến trúc One-Stage, giải pháp Gimbal Lock, tính chất Scale Invariance của EAR/MAR, MLOps configuration...). 
