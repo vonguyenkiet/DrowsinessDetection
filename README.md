@@ -22,7 +22,7 @@ DrowsinessDetection/
 │       └── alarm.wav             # File âm thanh chuông báo động
 ├── data/
 │   ├── raw_videos/               # Dữ liệu video thô 5s (dành cho huấn luyện/đánh giá)
-│   └── merged_videos/            # Dữ liệu video đã ghép 15s siêu tốc
+│   └── merged_videos/            # Dữ liệu video đã ghép 15s
 ├── src/
 │   ├── config/
 │   │   └── settings.py           # Quản lý tập trung các hằng số và ngưỡng sinh trắc (EAR, MAR, Pose)
@@ -36,7 +36,6 @@ DrowsinessDetection/
 │       ├── geometry.py           # Chứa thuật toán khoảng cách Euclidean tính EAR và MAR
 │       ├── pose.py               # Thuật toán solvePnP và giải mã Euler tính góc xoay đầu
 │       ├── preprocessing.py      # Xử lý thiếu sáng ban đêm (thuật toán CLAHE)
-│       ├── merge_videos.py       # Script hỗ trợ hợp nhất video dùng FFmpeg Stream-copy
 │       └── threshold_tuning.py   # Script tự động học và phân tích ngưỡng từ dữ liệu video
 ├── threshold_features15s.csv     # Bảng dữ liệu thô (được xuất ra sau khi chạy Tuning)
 ├── requirements.txt              # Danh sách toàn bộ thư viện Python (Dependencies)

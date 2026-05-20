@@ -20,8 +20,8 @@ MAR_THRESHOLD = 0.55       # Ngưỡng ngáp (trên giá trị này là ngáp)
 
 # --- HEAD POSE THRESHOLDS (Distraction) ---
 # Cảnh báo khi Yaw (quay trái/phải) hoặc Pitch (cúi/ngẩng) vượt ngưỡng
-PITCH_THRESHOLD = 15.0    # Độ
-YAW_THRESHOLD = 20.0      # Độ
+PITCH_THRESHOLD = 20.0    # Độ
+YAW_THRESHOLD = 30.0      # Độ
 
 # --- TIME PARAMETERS ---
 ALERT_COOLDOWN = 4.0      # Giây: Thời gian đóng băng sau một cảnh báo để tránh spam
